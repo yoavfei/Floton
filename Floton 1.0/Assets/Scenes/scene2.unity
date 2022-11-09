@@ -163,6 +163,7 @@ MonoBehaviour:
   planetList:
   - {fileID: 1424113346}
   - {fileID: 1038871211}
+  targetPlanet: {fileID: 1424113346}
   releaseTime: 0.15
   maxDragDistance: 2
 --- !u!231 &68332099
@@ -5227,6 +5228,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   hook: {fileID: 0}
   planetList: []
+  targetPlanet: {fileID: 0}
   releaseTime: 0.15
   maxDragDistance: 2
 --- !u!1 &181281183
@@ -10244,6 +10246,7 @@ GameObject:
   - component: {fileID: 1038871214}
   - component: {fileID: 1038871213}
   - component: {fileID: 1038871212}
+  - component: {fileID: 1038871215}
   m_Layer: 0
   m_Name: jupiter
   m_TagString: Untagged
@@ -10334,6 +10337,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1038871215
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038871211}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3.895
 --- !u!1 &1424113346
 GameObject:
   m_ObjectHideFlags: 0
@@ -10345,6 +10364,7 @@ GameObject:
   - component: {fileID: 1424113349}
   - component: {fileID: 1424113348}
   - component: {fileID: 1424113347}
+  - component: {fileID: 1424113350}
   m_Layer: 0
   m_Name: earth3
   m_TagString: Untagged
@@ -10435,6 +10455,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1424113350
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424113346}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.6
 --- !u!1 &1770862103
 GameObject:
   m_ObjectHideFlags: 0

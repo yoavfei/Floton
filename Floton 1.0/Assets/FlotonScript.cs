@@ -10,6 +10,7 @@ public class FlotonScript : MonoBehaviour
     public Rigidbody2D hook;
 
     public List<GameObject> planetList;
+    public GameObject targetPlanet;
     private List<Vector2> forceList = new List<Vector2>();
 
     public float releaseTime = .15f;
@@ -67,7 +68,7 @@ public class FlotonScript : MonoBehaviour
                 //angle = Mathf.Atan(yDif / Mathf.Abs(xDif));
                 gravityForce = gravity * displacement;
 
-                print(gravityForce);
+                //print(gravityForce);
 
                 //forceList.Add(new Vector2(gravity * Mathf.Cos(angle), gravity * Mathf.Sin(angle)));
                 forceList.Add(gravityForce);
@@ -77,7 +78,7 @@ public class FlotonScript : MonoBehaviour
 
             foreach(Vector2 force in forceList)
             {
-                print (force);
+                //print (force);
                 totalForce += force;
             }
 
@@ -108,6 +109,26 @@ public class FlotonScript : MonoBehaviour
        
         StartCoroutine(Release());
         released = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print("test");
+
+        if(collision.gameObject == targetPlanet)
+        {
+            print ("success");
+        }
+        else
+        {
+            foreach (GameObject planet in planetList)
+            {
+                if (collision.gameObject == planet)
+                {
+                    print("fail");
+                }
+            }
+        }
     }
 
     IEnumerator Release(){
