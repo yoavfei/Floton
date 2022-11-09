@@ -23,6 +23,7 @@ public class FlotonScript : MonoBehaviour
     private float distance;
     private float gravity;
     private float angle;
+    private Vector2 gravityForce;
 
 
     private void Start()
@@ -57,24 +58,32 @@ public class FlotonScript : MonoBehaviour
 
                 yDif = planet.GetComponent<Transform>().position.y - GetComponent<Transform>().position.y;
 
+                Vector2 displacement = planet.GetComponent<Transform>().position - GetComponent<Transform>().position;
+                displacement.Normalize();
+
                 distance = Vector2.Distance(planet.GetComponent<Transform>().position, GetComponent<Transform>().position);
 
                 gravity = (float)Variables.Object(planet).Get("Gravity") / Mathf.Pow(distance / 10, 2);
-                angle = Mathf.Acos(xDif / distance);
+                //angle = Mathf.Atan(yDif / Mathf.Abs(xDif));
+                gravityForce = gravity * displacement;
 
-                forceList.Add(new Vector2(gravity * Mathf.Cos(angle), gravity * Mathf.Sin(angle)));
+                print(gravityForce);
+
+                //forceList.Add(new Vector2(gravity * Mathf.Cos(angle), gravity * Mathf.Sin(angle)));
+                forceList.Add(gravityForce);
             }
 
             Vector2 totalForce = new Vector2(0, 0);
 
             foreach(Vector2 force in forceList)
             {
+                print (force);
                 totalForce += force;
             }
 
             GetComponent<ConstantForce2D>().force = totalForce;
        
-                print(gravity + "         " + xDif + "         " + distance + "         " + angle+ "        " + GetComponent<ConstantForce2D>().force);
+                //print(gravity + "         " + xDif + "         " + distance + "         " + angle+ "        " + GetComponent<ConstantForce2D>().force);
             //  GetComponent<ConstantForce2D>().force = new Vector2( xDif* planet.GetComponent <Variables>().Gravity/ Mathf.Pow(distance,2), yDif / Mathf.Pow(distance, 2));
             //  GetComponent<ConstantForce2D>().force = new Vector2(xDif * gravity / Mathf.Pow(distance, 2), yDif * gravity / Mathf.Pow(distance, 2));
 
