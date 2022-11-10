@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+//using System.Numerics;
 using Unity.VisualScripting;
+using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class FlotonScript : MonoBehaviour
 {
+
+    public int level;
 
     public Rigidbody2D rb;
     public Rigidbody2D hook;
@@ -16,8 +22,11 @@ public class FlotonScript : MonoBehaviour
     public float releaseTime = .15f;
     public float maxDragDistance = 2f;
 
-    private bool isPressed = false;
-    private bool released = false;
+    public float cameraWidth = 55;
+    public float cameraHeight = 20;
+
+    private bool isPressed;
+    private bool released;
 
     private float xDif;
     private float yDif;
@@ -29,14 +38,33 @@ public class FlotonScript : MonoBehaviour
 
     private void Start()
     {
-       
-    }
+       isPressed = false;
+       released = false;
+
+       cameraWidth = 55;
+      cameraHeight = 20;
+}
 
     void Update(){
+        print(cameraWidth + "  " + cameraHeight);
+  
+        
+        if(GetComponent<Transform>().position.x<-cameraWidth || GetComponent<Transform>().position.x >  cameraWidth || GetComponent<Transform>().position.y < - cameraHeight || GetComponent<Transform>().position.y > cameraHeight)
+        {
 
+            //print(GetComponent<Transform>().position);
+            reloadLevel();
+        }
+        
 
+        if (GetComponent<Transform>().position.x < -cameraWidth)
+        {
 
-        if(isPressed){
+            
+            //reloadLevel();
+        }
+
+        if (isPressed){
             //print("running");
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -125,10 +153,17 @@ public class FlotonScript : MonoBehaviour
             {
                 if (collision.gameObject == planet)
                 {
-                    print("fail");
+                    reloadLevel();
                 }
             }
         }
+    }
+
+    public void reloadLevel()
+    {
+      
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 
     IEnumerator Release(){
