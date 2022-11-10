@@ -150,6 +150,7 @@ public class FlotonScript : MonoBehaviour
         if(collision.gameObject == targetPlanet)
         {
             print ("success");
+            loadNextLevel();
         }
         else
         {
@@ -167,6 +168,18 @@ public class FlotonScript : MonoBehaviour
     {
         fadeCamera.GetComponent<FadeCamera>().OnGUI();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    }
+
+    public void loadNextLevel()
+    {
+        fadeCamera.GetComponent<FadeCamera>().OnGUI();
+
+        string levelName = SceneManager.GetActiveScene().name;
+
+        string levelNum = levelName.Substring(levelName.Length-1);
+
+        SceneManager.LoadScene(levelName.Substring(0, levelName.Length - 1) + levelNum);
 
     }
 
