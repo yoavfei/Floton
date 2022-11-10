@@ -14,6 +14,7 @@ public class FlotonScript : MonoBehaviour
 
     public Rigidbody2D rb;
     public Rigidbody2D hook;
+    public GameObject fadeCamera;
 
     public List<GameObject> planetList;
     public GameObject targetPlanet;
@@ -46,10 +47,13 @@ public class FlotonScript : MonoBehaviour
 }
 
     void Update(){
-        print(cameraWidth + "  " + cameraHeight);
-  
-        
-        if(GetComponent<Transform>().position.x<-cameraWidth || GetComponent<Transform>().position.x >  cameraWidth || GetComponent<Transform>().position.y < - cameraHeight || GetComponent<Transform>().position.y > cameraHeight)
+
+        if (!this)
+        {
+            print("nope");
+        }
+
+        if (GetComponent<Transform>().position.x<-cameraWidth || GetComponent<Transform>().position.x >  cameraWidth || GetComponent<Transform>().position.y < - cameraHeight || GetComponent<Transform>().position.y > cameraHeight)
         {
 
             //print(GetComponent<Transform>().position);
@@ -161,7 +165,7 @@ public class FlotonScript : MonoBehaviour
 
     public void reloadLevel()
     {
-      
+        fadeCamera.GetComponent<FadeCamera>().OnGUI();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
