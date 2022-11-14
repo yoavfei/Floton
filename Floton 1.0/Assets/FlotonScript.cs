@@ -15,6 +15,9 @@ public class FlotonScript : MonoBehaviour
     public Rigidbody2D rb;
     public Rigidbody2D hook;
     public GameObject fadeCamera;
+    public GameObject completedText;
+    public GameObject panel;
+
 
     public List<GameObject> planetList;
     public GameObject targetPlanet;
@@ -173,13 +176,17 @@ public class FlotonScript : MonoBehaviour
 
     public void loadNextLevel()
     {
+
+        GameObject text = Instantiate(completedText, new Vector2(0, 0), targetPlanet.transform.rotation);
+        text.transform.SetParent(panel.transform, false);
+
         fadeCamera.GetComponent<FadeCamera>().OnGUI();
 
-        string levelName = SceneManager.GetActiveScene().name;
+        
 
-        string levelNum = levelName.Substring(levelName.Length-1);
+        StartCoroutine(CameraPause());
 
-        SceneManager.LoadScene(levelName.Substring(0, levelName.Length - 1) + levelNum);
+       
 
     }
 
@@ -192,5 +199,17 @@ public class FlotonScript : MonoBehaviour
        
         //print("released");
     }
-    
+
+    IEnumerator CameraPause()
+    {
+
+        yield return new WaitForSeconds(100f*Time.deltaTime);
+
+        string levelName = SceneManager.GetActiveScene().name;
+
+        int levelNum = int.Parse(levelName.Substring(levelName.Length - 2)) + 1;
+        SceneManager.LoadScene(levelName.Substring(0, levelName.Length - 1) + levelNum);
+
+    }
+
 }
